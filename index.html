@@ -21,7 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- html2canvas for image capture -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
     <!-- css -->
     <link rel="stylesheet" href="style.css" />
@@ -29,48 +29,69 @@
 
   <body class="bg-[#F9F9F9] bg-[url(./img/bg.png)]">
     <main class="m-3 mt-[15%]">
-      <div class="text-center">
-        <h1 class="text-[#6984C9] text-3xl">Quote from the god</h1>
-      </div>
-
-      <div class="space-y-6 text-center mt-10">
-        <!-- Dropdown -->
-        <div>
-          <select class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options">
-            <option>Category</option>
-          </select>
+      <div id="main">
+        <div class="text-center">
+          <h1 class="text-[#6984C9] text-3xl">Quote from the god</h1>
         </div>
 
-        <!-- Card Stack -->
-        <div id="quote-card" class="relative w-80 h-96 mx-auto">
-          <div class="absolute top-4 left-4 w-full h-full rounded-xl bg-red-200 z-0"></div>
-          <div class="absolute top-2 left-2 w-full h-full rounded-xl bg-green-200 z-10"></div>
-          <div class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden">
-            <p class="text-lg font-semibold text-center text-black overflow-hidden text-ellipsis break-words">
-              <span class="border-b-4 border-black px-2 block overflow-hidden break-words">
-                “ <span id="text">Press Shuffle</span> ”
-              </span>
-            </p>
+        <div class="space-y-6 text-center mt-10">
+          <!-- Dropdown -->
+          <div>
+            <select
+              class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options"
+            >
+              <option>Category</option>
+            </select>
+          </div>
+
+          <!-- Card Stack -->
+          <div id="quote-card" class="relative w-80 h-96 mx-auto">
+            <div
+              class="absolute top-4 left-4 w-full h-full rounded-xl bg-red-200 z-0"
+            ></div>
+            <div
+              class="absolute top-2 left-2 w-full h-full rounded-xl bg-green-200 z-10"
+            ></div>
+            <div
+              class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden"
+            >
+              <p
+                class="text-lg font-semibold text-center text-black overflow-hidden text-ellipsis break-words"
+              >
+                <span
+                  class="border-b-4 border-black px-2 block overflow-hidden break-words"
+                >
+                  “ <span id="text">Press Shuffle</span> ”
+                </span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="flex items-center justify-center gap-6 mt-[10%]">
+            <button
+              id="shuffleBtn"
+              class="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition"
+            >
+              <i class="fa-solid fa-arrows-rotate"></i> Shuffle
+            </button>
+
+            <button
+              id="shareBtn"
+              class="p-3 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition py-2"
+            >
+              <i class="fa-solid fa-share-nodes"></i>
+            </button>
+
+            <button
+              id="downloadBtn"
+              class="p-3 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition py-2"
+            >
+              <i class="fa-solid fa-download"></i>
+            </button>
           </div>
         </div>
-
-        <!-- Buttons -->
-        <div class="flex items-center justify-center gap-6 mt-[10%]">
-          <button id="shuffleBtn"
-            class="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition">
-            <i class="fa-solid fa-arrows-rotate"></i> Shuffle
-          </button>
-
-          <button id="shareBtn"
-            class="p-3 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition py-2">
-            <i class="fa-solid fa-share-nodes"></i>
-          </button>
-
-          <button id="downloadBtn"
-            class="p-3 rounded-full border-2 border-blue-300 hover:bg-blue-100 transition py-2">
-            <i class="fa-solid fa-download"></i>
-          </button>
-        </div>
+    </div>
 
         <!-- Submission Section -->
         <div class="flex flex-col justify-between items-center p-6">
@@ -79,12 +100,16 @@
           </div>
 
           <div class="mt-6">
-            <select class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options">
+            <select
+              class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options"
+            >
               <option>Category</option>
             </select>
           </div>
 
-          <div class="w-80 h-96 bg-white rounded-xl border-2 border-black shadow-lg flex items-center justify-center mt-6">
+          <div
+            class="w-80 h-96 bg-white rounded-xl border-2 border-black shadow-lg flex items-center justify-center mt-6"
+          >
             <div class="relative flex items-center">
               <span class="text-3xl font-semibold text-black mr-2">“</span>
               <input
@@ -97,8 +122,10 @@
             </div>
           </div>
 
-          <button id="send"
-            class="mt-10 mb-6 p-3 px-4 rounded-full border-2 border-[#6984C9] hover:bg-blue-100 transition">
+          <button
+            id="send"
+            class="mt-10 mb-6 p-3 px-4 rounded-full border-2 border-[#6984C9] hover:bg-blue-100 transition"
+          >
             <i class="fas fa-paper-plane text-xl text-black"></i>
           </button>
         </div>
@@ -115,6 +142,7 @@
         getDocs,
       } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
+      // Firebase config
       const firebaseConfig = {
         apiKey: "AIzaSyBtAtawjLDrG5LBAKBlzGYKnJieVBCgcbg",
         authDomain: "shuffleme-398dc.firebaseapp.com",
@@ -124,18 +152,21 @@
         appId: "1:950272443337:web:8485b0b4db1f703eae1e18",
       };
 
+      // Init Firebase
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
+      // DOM Elements
       const sendBtn = document.getElementById("send");
       const quoteInput = document.getElementById("quoteinput");
       const textDisplay = document.getElementById("text");
       const shuffleBtn = document.getElementById("shuffleBtn");
       const shareBtn = document.getElementById("shareBtn");
       const downloadBtn = document.getElementById("downloadBtn");
-      const quoteCard = document.getElementById("quote-card");
+      // แคปเฉพาะ quote card
+      const target = document.getElementById("main");
 
-      // CREATE
+      // === FIREBASE SUBMIT ===
       sendBtn.addEventListener("click", async () => {
         const quote = quoteInput.value.trim();
         if (quote) {
@@ -147,7 +178,7 @@
         }
       });
 
-      // READ + SHUFFLE
+      // === SHUFFLE QUOTE ===
       async function loadQuotes() {
         const querySnapshot = await getDocs(collection(db, "quote"));
         const quotes = [];
@@ -164,33 +195,41 @@
         }
       }
 
-      // Shuffle listener
       shuffleBtn.addEventListener("click", loadQuotes);
 
-      // Share button logic
+      // === SHARE SCREEN ===
       shareBtn.addEventListener("click", async () => {
-        const quote = textDisplay.textContent;
-        if (navigator.share) {
-          try {
-            await navigator.share({
-              title: "Quote from ShuffleME",
-              text: `“${quote}”`,
-              url: window.location.href,
-            });
-          } catch (err) {
-            console.error("Sharing failed:", err);
-          }
-        } else {
-          Swal.fire("Oops!", "Sharing not supported on this device.", "warning");
-        }
+        html2canvas(target).then(async (canvas) => {
+          canvas.toBlob(async (blob) => {
+            const file = new File([blob], "quote.png", { type: "image/png" });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: "My Quote from ShuffleMe",
+                  text: "Check out this awesome quote!",
+                });
+              } catch (err) {
+                Swal.fire("Error", "Sharing was canceled or failed.", "error");
+              }
+            } else {
+              Swal.fire(
+                "Unsupported",
+                "Sharing not supported on this device.",
+                "warning"
+              );
+            }
+          });
+        });
       });
 
-      // Download as image
+      // === DOWNLOAD SCREEN ===
       downloadBtn.addEventListener("click", () => {
-        html2canvas(quoteCard).then((canvas) => {
+        html2canvas(target).then((canvas) => {
           const link = document.createElement("a");
           link.download = "quote.png";
-          link.href = canvas.toDataURL();
+          link.href = canvas.toDataURL("image/png");
           link.click();
         });
       });
