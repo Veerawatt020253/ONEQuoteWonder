@@ -250,28 +250,37 @@ If there are no flagged keywords, return an empty array.`,
         let remainingQuotes = [];
 
         async function loadQuotes() {
-            if (allQuotes.length === 0) {
-                const querySnapshot = await getDocs(collection(db, "quote"));
-                querySnapshot.forEach((docSnap) => {
-                    const data = docSnap.data();
-                    if (data.quote) allQuotes.push(data.quote);
-                });
-                remainingQuotes = [...allQuotes];
-            }
+    if (allQuotes.length === 0) {
+        const querySnapshot = await getDocs(collection(db, "quote"));
+        querySnapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            if (data.quote) allQuotes.push(data.quote);
+        });
+        remainingQuotes = [...allQuotes];
+    }
 
-            // ถ้า remaining หมดแล้ว ให้เริ่มรอบใหม่
-            if (remainingQuotes.length === 0) {
-                remainingQuotes = [...allQuotes];
-            }
+    if (remainingQuotes.length === 0) {
+        remainingQuotes = [...allQuotes];
+    }
 
-            // เลือกแบบไม่ซ้ำ
-            const randomIndex = Math.floor(Math.random() * remainingQuotes.length);
-            const selectedQuote = remainingQuotes[randomIndex];
-            textDisplay.textContent = selectedQuote;
+    const randomIndex = Math.floor(Math.random() * remainingQuotes.length);
+    const selectedQuote = remainingQuotes[randomIndex];
 
-            // ลบ quote ที่เลือกออกจาก remaining
-            remainingQuotes.splice(randomIndex, 1);
-        }
+    // ใส่แอนิเมชันก่อนเปลี่ยนข้อความ
+    textDisplay.classList.add("animate-rotateOutIn");
+
+    // รอให้ animation วิ่งก่อนค่อยเปลี่ยน text
+    setTimeout(() => {
+        textDisplay.textContent = selectedQuote;
+    }, 300); // ครึ่งเวลา animation
+
+    // ลบ animation class หลังจบ
+    setTimeout(() => {
+        textDisplay.classList.remove("animate-rotateOutIn");
+    }, 600);
+
+    remainingQuotes.splice(randomIndex, 1);
+}
 
         shuffleBtn.addEventListener("click", loadQuotes);
 
