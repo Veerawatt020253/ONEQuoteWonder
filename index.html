@@ -55,8 +55,10 @@
                                 “ <span id="text">Press Shuffle</span> ”
                             </span>
                         </p>
+                        <button id="reportBtn" class="absolute top-2 right-2 text-red-500 hover:text-red-700 text-xl">
+                            <i class="fas fa-flag"></i>
+                          </button> 
                     </div>
-
                 </div>
 
                 <!-- Buttons -->
@@ -127,7 +129,7 @@
         </div>
     </div>
 
-    <audio id="backgroundMusic" autoplay loop>
+    <audio id="backgroundMusic" autoplay loop playsinline>
         <source src="https://earnnity.com/audio/music.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
     </audio>
@@ -380,6 +382,30 @@ If there are no flagged keywords, return an empty array.`,
         },
       },
     };
+
+    document.getElementById('reportBtn').addEventListener('click', () => {
+    Swal.fire({
+      title: 'Report Quote?',
+      text: "Do you want to report this quote as inappropriate?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, report it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // TODO: ส่งข้อมูลไปยัง Firebase หรือ API ถ้าต้องการ
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Reported!',
+          text: 'This quote has been reported.',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
+  });
   </script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
