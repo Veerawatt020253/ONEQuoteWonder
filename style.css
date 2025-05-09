@@ -3,12 +3,26 @@
   src: url(./font/JumperPERSONALUSEONLY-Regular.ttf);
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6984c9;
+  border-radius: 5px;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: jumper;
   font-display: block;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .dropdown-options {
@@ -31,8 +45,4 @@ body {
   font-size: 24px;
   line-height: 1.2;
   vertical-align: top;
-}
-
-* {
-  box-sizing: border-box;
 }

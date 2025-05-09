@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ONE Quote Wonder</title>
@@ -9,10 +10,7 @@
     <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
 
     <!-- font awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
     <!-- tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,192 +21,166 @@
     <!-- html2canvas for image capture -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
+    <!-- aos -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <!-- css -->
     <link rel="stylesheet" href="style.css" />
-  </head>
+</head>
 
-  <body
-  class="bg-[#F9F9F9] bg-[url(./img/bg.png)]">
+<body class="bg-[#F9F9F9] bg-[url(./img/bg.png)]">
     <main class="m-3 mt-[15%]">
         <div id="main" class="">
-        <div class="text-center">
-          <h1 class="text-[#6984C9] text-3xl">Quote From The God</h1>
+            <div class="text-center">
+                <h1 class="text-[#6984C9] text-3xl " data-aos="fade-down">Quote From The God</h1>
+            </div>
+
+            <div class="space-y-6 text-center mt-10 mb-6">
+                <!-- Dropdown -->
+                <div data-aos="zoom-in-up">
+                    <select
+                        class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options">
+                        <option class="text-lg">Category</option>
+                    </select>
+                </div>
+
+                <!-- Card Stack -->
+                <div id="quote-card" class="relative w-80 h-96 mx-auto" data-aos="flip-left">
+                    <div class="absolute top-4 left-4 w-full h-full rounded-xl bg-red-200 z-0"></div>
+                    <div class="absolute top-2 left-2 w-full h-full rounded-xl bg-green-200 z-10"></div>
+                    <div
+                        class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden">
+                        <p class="text-lg font-semibold text-center text-black break-words w-full leading-relaxed">
+                            <span class="border-b-4 border-black px-2 block">
+                                “ <span id="text">Press Shuffle</span> ”
+                            </span>
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+                <div class="flex items-center justify-center gap-6 mt-[10%]" data-aos="fade-down">
+                    <button id="shuffleBtn"
+                        class="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition">
+                        <i class="fa-solid fa-arrows-rotate"></i> Shuffle
+                    </button>
+
+                    <button id="shareIGBtn"
+                        class="p-3 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition py-2">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+
+                    <button id="downloadBtn"
+                        class="p-3 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition py-2">
+                        <i class="fa-solid fa-download"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-
-        <div class="space-y-6 text-center mt-10 mb-6">
-          <!-- Dropdown -->
-          <div>
-            <select
-              class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options"
-            >
-              <option class="text-lg">Category</option>
-            </select>
-          </div>
-          
-            <!-- Card Stack -->
-            <div id="quote-card" class="relative w-80 h-96 mx-auto">
-                <div
-                class="absolute top-4 left-4 w-full h-full rounded-xl bg-red-200 z-0"
-                ></div>
-                <div
-                class="absolute top-2 left-2 w-full h-full rounded-xl bg-green-200 z-10"
-                ></div>
-                <div
-  class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden"
->
-  <p
-    class="text-lg font-semibold text-center text-black break-words w-full leading-relaxed"
-  >
-    <span
-      class="border-b-4 border-black px-2 block"
-    >
-      “ <span id="text">Press Shuffle</span> ”
-    </span>
-  </p>
-</div>
-            
-          </div>
-
-          <!-- Buttons -->
-          <div class="flex items-center justify-center gap-6 mt-[10%]">
-            <button
-              id="shuffleBtn"
-              class="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition"
-            >
-              <i class="fa-solid fa-arrows-rotate"></i> Shuffle
-            </button>
-
-            <button
-              id="shareIGBtn"
-              class="p-3 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition py-2"
-            >
-              <i class="fa-solid fa-share-nodes"></i>
-            </button>
-
-            <!-- <button
-  id="shareIGBtn"
-  class="p-3 rounded-full border-2 border-[#C13584] hover:bg-pink-100 transition py-2"
->
-  <i class="fa-brands fa-instagram"></i>
-</button> -->
-
-            <button
-              id="downloadBtn"
-              class="p-3 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition py-2"
-            >
-              <i class="fa-solid fa-download"></i>
-            </button>
-          </div>
-        </div>
-    </div>
 
         <!-- Submission Section -->
-        <div class="flex flex-col justify-between items-center p-6 pt-0">
-          <div class="text-center mt-8">
-            <h1 class="text-2xl font-bold text-black">Submission</h1>
-          </div>
-
-          <div class="mt-6">
-            <select
-              class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options"
-            >
-              <option>Category</option>
-            </select>
-          </div>
-
-          <div
-            class="w-80 h-96 bg-white rounded-xl border-2 border-black shadow-lg flex items-center justify-center mt-6"
-          >
-            <div class="relative flex items-center">
-              <span class="text-3xl font-semibold text-black mr-2">“</span>
-              <input
-                type="text"
-                placeholder="Enter quote"
-                id="quoteinput"
-                class="text-2xl font-semibold text-black text-center border-b-4 border-black px-4 py-1 focus:outline-none bg-transparent w-52"
-              />
-              <span class="text-3xl font-semibold text-black ml-2">”</span>
+        <div class="flex flex-col justify-between items-center p-6 pt-0" >
+            <div class="text-center mt-8" data-aos="fade-down">
+                <h1 class="text-2xl font-bold text-black">Submission</h1>
             </div>
-          </div>
 
-          <button
-            id="send"
-            class="mt-10 mb-6 p-3 px-4 rounded-full border-2 border-[#6984C9] hover:bg-blue-100 transition"
-          >
-            <i class="fas fa-paper-plane text-xl text-black"></i>
-          </button>
+            <div class="mt-6" data-aos="fade-right">
+                <select
+                    class="px-4 py-2 rounded-full border-2 shadow-md font-semibold focus:outline-none border-[#6984C9] dropdown-options">
+                    <option>Category</option>
+                </select>
+            </div>
+
+            <div
+            data-aos="fade-left"
+                class="w-80 h-96 bg-white rounded-xl border-2 border-black shadow-lg flex items-center justify-center mt-6">
+                <div class="relative flex items-center">
+                    <span class="text-3xl font-semibold text-black mr-2">“</span>
+                    <input type="text" placeholder="Enter quote" id="quoteinput"
+                        class="text-2xl font-semibold text-black text-center border-b-4 border-black px-4 py-1 focus:outline-none bg-transparent w-52" />
+                    <span class="text-3xl font-semibold text-black ml-2">”</span>
+                </div>
+            </div>
+
+            <button id="send"
+            data-aos="fade-up"
+                class="mt-10 mb-10 p-3 px-4 rounded-full border-2 border-[#6984C9] hover:bg-blue-100 transition">
+                <i class="fas fa-paper-plane text-xl text-black"></i>
+            </button>
         </div>
-      </div>
+        </div>
     </main>
 
     <!-- Background Music Player -->
-<div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 shadow-md p-3 flex items-center justify-between px-4 z-50">
-    <div class="flex items-center gap-3">
-      <i class="fa-solid fa-music text-[#6984C9]"></i>
-      <span class="text-sm font-semibold text-gray-700">Music</span>
+    <div
+        class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 shadow-md p-3 flex items-center justify-between px-4 z-50 animate-fadeIn delay-500">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-music text-[#6984C9]"></i>
+            <span class="text-sm font-semibold text-gray-700">Music</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-28 accent-[#6984C9]" />
+            <button id="toggleMusicBtn" class="text-[#6984C9] hover:text-blue-700 font-medium">
+                ⏸ Pause
+            </button>
+        </div>
     </div>
-    <div class="flex items-center gap-4">
-      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-28 accent-[#6984C9]" />
-      <button id="toggleMusicBtn" class="text-[#6984C9] hover:text-blue-700 font-medium">
-        ⏸ Pause
-      </button>
-    </div>
-  </div>
-  
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="https://earnnity.com/audio/music.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
+
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="https://earnnity.com/audio/music.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+    </audio>
 
     <!-- ไฟเบสนะจ๊ะ อุอิอ้ะ -->
     <script type="module">
 
-    // ใครเปิดมาเจอขอโทษสังคมที่สร้าง backend มาแบบลวกๆ ขี้เกียจทำ5555555
+        // ใครเปิดมาเจอขอโทษสังคมที่สร้าง backend มาแบบลวกๆ ขี้เกียจทำ5555555
 
 
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        addDoc,
-        getDocs,
-      } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            addDoc,
+            getDocs,
+        } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-firestore.js";
 
-      // Firebase config
-      const firebaseConfig = {
-        apiKey: "AIzaSyBtAtawjLDrG5LBAKBlzGYKnJieVBCgcbg",
-        authDomain: "shuffleme-398dc.firebaseapp.com",
-        projectId: "shuffleme-398dc",
-        storageBucket: "shuffleme-398dc.appspot.com",
-        messagingSenderId: "950272443337",
-        appId: "1:950272443337:web:8485b0b4db1f703eae1e18",
-      };
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtAtawjLDrG5LBAKBlzGYKnJieVBCgcbg",
+            authDomain: "shuffleme-398dc.firebaseapp.com",
+            projectId: "shuffleme-398dc",
+            storageBucket: "shuffleme-398dc.appspot.com",
+            messagingSenderId: "950272443337",
+            appId: "1:950272443337:web:8485b0b4db1f703eae1e18",
+        };
 
-      // Init Firebase
-      const app = initializeApp(firebaseConfig);
-      const db = getFirestore(app);
+        // Init Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      // DOM Elements
-      const sendBtn = document.getElementById("send");
-      const quoteInput = document.getElementById("quoteinput");
-      const textDisplay = document.getElementById("text");
-      const shuffleBtn = document.getElementById("shuffleBtn");
-    //   const shareBtn = document.getElementById("shareBtn");
-      const downloadBtn = document.getElementById("downloadBtn");
-      // แคปเฉพาะ quote card
-      const target = document.getElementById("main");
-      const shareIGBtn = document.getElementById("shareIGBtn");
+        // DOM Elements
+        const sendBtn = document.getElementById("send");
+        const quoteInput = document.getElementById("quoteinput");
+        const textDisplay = document.getElementById("text");
+        const shuffleBtn = document.getElementById("shuffleBtn");
+        //   const shareBtn = document.getElementById("shareBtn");
+        const downloadBtn = document.getElementById("downloadBtn");
+        // แคปเฉพาะ quote card
+        const target = document.getElementById("main");
+        const shareIGBtn = document.getElementById("shareIGBtn");
 
-      async function analyzeQuoteWithGemini(quote) {
-  const API_KEY = 'AIzaSyAhn_j2j0fxnzxQhqnr1iYut013Qyu-3hs';
-  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        async function analyzeQuoteWithGemini(quote) {
+            const API_KEY = 'AIzaSyAhn_j2j0fxnzxQhqnr1iYut013Qyu-3hs';
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
 
-  const payload = {
-    contents: [
-      {
-        parts: [
-          {
-            text: `Please analyze the following quote:
+            const payload = {
+                contents: [
+                    {
+                        parts: [
+                            {
+                                text: `Please analyze the following quote:
 "${quote}"
 
 Respond in this JSON format:
@@ -219,156 +191,191 @@ Respond in this JSON format:
 }
 
 If there are no flagged keywords, return an empty array.`,
-          },
-        ],
-      },
-    ],
-  };
+                            },
+                        ],
+                    },
+                ],
+            };
 
-  const res = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+            const res = await fetch(endpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
 
-  const result = await res.json();
-  const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+            const result = await res.json();
+            const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-  try {
-    // Clean markdown wrappers if any
-    const cleanedText = rawText.replace(/```json|```/g, "").trim();
-    return JSON.parse(cleanedText);
-  } catch (err) {
-    console.error("Failed to parse Gemini response", err, rawText);
-    return null;
-  }
-}
+            try {
+                // Clean markdown wrappers if any
+                const cleanedText = rawText.replace(/```json|```/g, "").trim();
+                return JSON.parse(cleanedText);
+            } catch (err) {
+                console.error("Failed to parse Gemini response", err, rawText);
+                return null;
+            }
+        }
 
-      // === FIREBASE SUBMIT ===
-      sendBtn.addEventListener("click", async () => {
-  const quote = quoteInput.value.trim();
-  if (!quote) {
-    Swal.fire("Error!", "Please enter a quote.", "error");
-    return;
-  }
+        // === FIREBASE SUBMIT ===
+        sendBtn.addEventListener("click", async () => {
+            const quote = quoteInput.value.trim();
+            if (!quote) {
+                Swal.fire("Error!", "Please enter a quote.", "error");
+                return;
+            }
 
-  const result = await analyzeQuoteWithGemini(quote);
-  if (!result) {
-    Swal.fire("Error!", "AI analysis failed. Try again.", "error");
-    return;
-  }
+            const result = await analyzeQuoteWithGemini(quote);
+            if (!result) {
+                Swal.fire("Error!", "AI analysis failed. Try again.", "error");
+                return;
+            }
 
-  if (result.inappropriate) {
-    Swal.fire("Blocked!", "Inappropriate content detected. Please revise.", "error");
-    return;
-  }
+            if (result.inappropriate) {
+                Swal.fire("Blocked!", "Inappropriate content detected. Please revise.", "error");
+                return;
+            }
 
-  await addDoc(collection(db, "quote"), {
-    quote,
-    category: result.category || "uncategorized",
-  });
+            await addDoc(collection(db, "quote"), {
+                quote,
+                category: result.category || "uncategorized",
+            });
 
-  quoteInput.value = "";
-  Swal.fire("Added!", "Quote submitted successfully!", "success");
-});
-
-      let allQuotes = [];
-let remainingQuotes = [];
-
-async function loadQuotes() {
-  if (allQuotes.length === 0) {
-    const querySnapshot = await getDocs(collection(db, "quote"));
-    querySnapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-      if (data.quote) allQuotes.push(data.quote);
-    });
-    remainingQuotes = [...allQuotes];
-  }
-
-  // ถ้า remaining หมดแล้ว ให้เริ่มรอบใหม่
-  if (remainingQuotes.length === 0) {
-    remainingQuotes = [...allQuotes];
-  }
-
-  // เลือกแบบไม่ซ้ำ
-  const randomIndex = Math.floor(Math.random() * remainingQuotes.length);
-  const selectedQuote = remainingQuotes[randomIndex];
-  textDisplay.textContent = selectedQuote;
-
-  // ลบ quote ที่เลือกออกจาก remaining
-  remainingQuotes.splice(randomIndex, 1);
-}
-
-shuffleBtn.addEventListener("click", loadQuotes);
-
-// โหลดฉันทัสกาสฟหาดสหด
-downloadBtn.addEventListener("click", async () => {
-  await document.fonts.ready;
-  setTimeout(() => {
-    html2canvas(target, {
-      backgroundColor: "#F9F9F9",
-      scale: 2,
-      useCORS: true,
-    }).then((canvas) => {
-      const link = document.createElement("a");
-      link.download = "quote.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    });
-  }, 500); // รอ DOM เสถียรก่อน
-});
-
-shareIGBtn.addEventListener("click", async () => {
-    await document.fonts.ready; // รอให้โหลด font ก่อน
-  setTimeout(() => {
-    html2canvas(target, {
-      useCORS: true,
-      backgroundColor: "#F9F9F9",
-      scale: window.devicePixelRatio,
-    }).then((canvas) => {
-      canvas.toBlob((blob) => {
-        const url = URL.createObjectURL(blob);
-
-        // ดาวน์โหลดอัตโนมัติ
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "quote-for-ig.png";
-        link.click();
-
-        // แจ้งผู้ใช้
-        Swal.fire({
-          title: "Ready to Post!",
-          text: "Image saved. Open Instagram and add it to your Story manually.",
-          icon: "info",
-          confirmButtonText: "Open Instagram",
-          showCancelButton: true,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.open("instagram://story-camera", "_blank");
-          }
+            quoteInput.value = "";
+            Swal.fire("Added!", "Quote submitted successfully!", "success");
         });
-      });
-    });
-  }, 300); // รอ 300ms
-});
 
-// เพลงชิวไว้รุ่น Y2k
-const music = document.getElementById("backgroundMusic");
-const toggleBtn = document.getElementById("toggleMusicBtn");
-let isPlaying = false;
+        let allQuotes = [];
+        let remainingQuotes = [];
 
-toggleBtn.addEventListener("click", () => {
-  if (!isPlaying) {
-    music.play();
-    toggleBtn.innerHTML = "⏸ Pause";
-  } else {
-    music.pause();
-    toggleBtn.innerHTML = "▶ Play";
-  }
-  isPlaying = !isPlaying;
-});
+        async function loadQuotes() {
+            if (allQuotes.length === 0) {
+                const querySnapshot = await getDocs(collection(db, "quote"));
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    if (data.quote) allQuotes.push(data.quote);
+                });
+                remainingQuotes = [...allQuotes];
+            }
+
+            // ถ้า remaining หมดแล้ว ให้เริ่มรอบใหม่
+            if (remainingQuotes.length === 0) {
+                remainingQuotes = [...allQuotes];
+            }
+
+            // เลือกแบบไม่ซ้ำ
+            const randomIndex = Math.floor(Math.random() * remainingQuotes.length);
+            const selectedQuote = remainingQuotes[randomIndex];
+            textDisplay.textContent = selectedQuote;
+
+            // ลบ quote ที่เลือกออกจาก remaining
+            remainingQuotes.splice(randomIndex, 1);
+        }
+
+        shuffleBtn.addEventListener("click", loadQuotes);
+
+        // โหลดฉันทัสกาสฟหาดสหด
+        downloadBtn.addEventListener("click", async () => {
+            await document.fonts.ready;
+            setTimeout(() => {
+                html2canvas(target, {
+                    backgroundColor: "#F9F9F9",
+                    scale: 2,
+                    useCORS: true,
+                }).then((canvas) => {
+                    const link = document.createElement("a");
+                    link.download = "quote.png";
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+                });
+            }, 500); // รอ DOM เสถียรก่อน
+        });
+
+        shareIGBtn.addEventListener("click", async () => {
+            await document.fonts.ready; // รอให้โหลด font ก่อน
+            setTimeout(() => {
+                html2canvas(target, {
+                    useCORS: true,
+                    backgroundColor: "#F9F9F9",
+                    scale: window.devicePixelRatio,
+                }).then((canvas) => {
+                    canvas.toBlob((blob) => {
+                        const url = URL.createObjectURL(blob);
+
+                        // ดาวน์โหลดอัตโนมัติ
+                        const link = document.createElement("a");
+                        link.href = url;
+                        link.download = "quote-for-ig.png";
+                        link.click();
+
+                        // แจ้งผู้ใช้
+                        Swal.fire({
+                            title: "Ready to Post!",
+                            text: "Image saved. Open Instagram and add it to your Story manually.",
+                            icon: "info",
+                            confirmButtonText: "Open Instagram",
+                            showCancelButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.open("instagram://story-camera", "_blank");
+                            }
+                        });
+                    });
+                });
+            }, 300); // รอ 300ms
+        });
+
+        // เพลงชิวไว้รุ่น Y2k
+        const music = document.getElementById("backgroundMusic");
+        const toggleBtn = document.getElementById("toggleMusicBtn");
+        let isPlaying = false;
+
+        toggleBtn.addEventListener("click", () => {
+            if (!isPlaying) {
+                music.play();
+                toggleBtn.innerHTML = "⏸ Pause";
+            } else {
+                music.pause();
+                toggleBtn.innerHTML = "▶ Play";
+            }
+            isPlaying = !isPlaying;
+        });
     </script>
-  </body>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            fadeIn: "fadeIn 1s ease-in-out",
+            slideUp: "slideUp 0.6s ease-out",
+            bounceIn: "bounceIn 0.8s ease",
+          },
+          keyframes: {
+            fadeIn: {
+              "0%": { opacity: "0" },
+              "100%": { opacity: "1" },
+            },
+            slideUp: {
+              "0%": { transform: "translateY(20px)", opacity: "0" },
+              "100%": { transform: "translateY(0)", opacity: "1" },
+            },
+            bounceIn: {
+              "0%": { transform: "scale(0.9)", opacity: "0" },
+              "60%": { transform: "scale(1.05)", opacity: "1" },
+              "100%": { transform: "scale(1)", opacity: "1" },
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
+
 </html>
