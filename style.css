@@ -12,3 +12,11 @@ html, body {
 .dropdown-options {
     /* filter: drop-shadow(16px 12px 10px #6984C9); */
 }
+
+#target {
+    background-image: url("bg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll; /* สำคัญ: อย่าใช้ fixed */
+  } 
