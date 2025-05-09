@@ -10,5 +10,5 @@ html, body {
 }
 
 .dropdown-options {
-    filter: drop-shadow(16px 12px 10px #6984C9);
+    /* filter: drop-shadow(16px 12px 10px #6984C9); */
 }
