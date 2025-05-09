@@ -145,7 +145,7 @@
 <div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 shadow-md p-3 flex items-center justify-between px-4 z-50">
     <div class="flex items-center gap-3">
       <i class="fa-solid fa-music text-[#6984C9]"></i>
-      <span class="text-sm font-semibold text-gray-700">Background Music</span>
+      <span class="text-sm font-semibold text-gray-700">Music</span>
     </div>
     <div class="flex items-center gap-4">
       <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-28 accent-[#6984C9]" />
@@ -160,7 +160,7 @@
     Your browser does not support the audio element.
   </audio>
 
-    <!-- Firebase -->
+    <!-- ไฟเบสนะจ๊ะ อุอิอ้ะ -->
     <script type="module">
 
     // ใครเปิดมาเจอขอโทษสังคมที่สร้าง backend มาแบบลวกๆ ขี้เกียจทำ5555555
@@ -303,34 +303,7 @@ async function loadQuotes() {
 
 shuffleBtn.addEventListener("click", loadQuotes);
 
-      // === SHARE SCREEN ===
-// shareBtn.addEventListener("click", async () => {
-//   html2canvas(target).then(async (canvas) => {
-//     canvas.toBlob(async (blob) => {
-//       const file = new File([blob], "quote.png", { type: "image/png" });
-
-//       if (navigator.canShare && navigator.canShare({ files: [file] })) {
-//         try {
-//           await navigator.share({
-//             files: [file],
-//             title: "My Quote from ShuffleMe",
-//             text: "Check out this awesome quote!",
-//           });
-//         } catch (err) {
-//           Swal.fire("Error", "Sharing was canceled or failed.", "error");
-//         }
-//       } else {
-//         Swal.fire(
-//           "Unsupported",
-//           "Sharing not supported on this device.",
-//           "warning"
-//         );
-//       }
-//     });
-//   });
-// });
-
-// === DOWNLOAD SCREEN ===
+// โหลดฉันทัสกาสฟหาดสหด
 downloadBtn.addEventListener("click", async () => {
   await document.fonts.ready;
   setTimeout(() => {
@@ -381,7 +354,7 @@ shareIGBtn.addEventListener("click", async () => {
   }, 300); // รอ 300ms
 });
 
-// === MUSIC CONTROL ===
+// เพลงชิวไว้รุ่น Y2k
 const music = document.getElementById("backgroundMusic");
 const toggleBtn = document.getElementById("toggleMusicBtn");
 let isPlaying = false;
