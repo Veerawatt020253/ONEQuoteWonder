@@ -1,22 +1,38 @@
 @font-face {
-    font-family: jumper;
-    src: url(./font/JumperPERSONALUSEONLY-Regular.ttf);
+  font-family: jumper;
+  src: url(./font/JumperPERSONALUSEONLY-Regular.ttf);
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: jumper;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: jumper;
+  font-display: block;
 }
 
 .dropdown-options {
-    /* filter: drop-shadow(16px 12px 10px #6984C9); */
+  /* filter: drop-shadow(16px 12px 10px #6984C9); */
 }
 
 #target {
-    background-image: url("bg.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* สำคัญ: อย่าใช้ fixed */
-  } 
+  width: 500px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+#quote-card {
+  font-family: sans-serif; /* ใช้ font ทั่วไปป้องกัน fallback เปลี่ยนตำแหน่ง */
+}
+
+.quote-text {
+  display: inline-block;
+  font-size: 24px;
+  line-height: 1.2;
+  vertical-align: top;
+}
+
+* {
+  box-sizing: border-box;
+}

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shuffle ME</title>
+    <title>ONE Quote Wonder</title>
 
     <!-- fav icon -->
-    <link rel="shortcut icon" href="./img/brainrot.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon" />
 
     <!-- font awesome -->
     <link
@@ -30,7 +30,7 @@
   <body
   class="bg-[#F9F9F9] bg-[url(./img/bg.png)]">
     <main class="m-3 mt-[15%]">
-      
+        <div id="main" class="">
         <div class="text-center">
           <h1 class="text-[#6984C9] text-3xl">Quote From The God</h1>
         </div>
@@ -44,7 +44,7 @@
               <option class="text-lg">Category</option>
             </select>
           </div>
-          <div id="main" class="">
+          
             <!-- Card Stack -->
             <div id="quote-card" class="relative w-80 h-96 mx-auto">
                 <div
@@ -54,19 +54,19 @@
                 class="absolute top-2 left-2 w-full h-full rounded-xl bg-green-200 z-10"
                 ></div>
                 <div
-                class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden"
-                >
-                <p
-                    class="text-lg font-semibold text-center text-black overflow-hidden text-ellipsis break-words"
-                >
-                    <span
-                    class="border-b-4 border-black px-2 block overflow-hidden break-words"
-                    >
-                    “ <span id="text">Press Shuffle</span> ”
-                    </span>
-                </p>
-                </div>
-            </div>
+  class="relative w-full h-full bg-yellow-100 rounded-xl border-2 border-black shadow-lg flex items-center justify-center z-20 p-4 overflow-hidden"
+>
+  <p
+    class="text-lg font-semibold text-center text-black break-words w-full leading-relaxed"
+  >
+    <span
+      class="border-b-4 border-black px-2 block"
+    >
+      “ <span id="text">Press Shuffle</span> ”
+    </span>
+  </p>
+</div>
+            
           </div>
 
           <!-- Buttons -->
@@ -78,19 +78,19 @@
               <i class="fa-solid fa-arrows-rotate"></i> Shuffle
             </button>
 
-            <!-- <button
-              id="shareBtn"
+            <button
+              id="shareIGBtn"
               class="p-3 rounded-full border-2 border-[#6984C9] hover:bg-[#6984C9] transition py-2"
             >
               <i class="fa-solid fa-share-nodes"></i>
-            </button> -->
+            </button>
 
-            <button
+            <!-- <button
   id="shareIGBtn"
   class="p-3 rounded-full border-2 border-[#C13584] hover:bg-pink-100 transition py-2"
 >
   <i class="fa-brands fa-instagram"></i>
-</button>
+</button> -->
 
             <button
               id="downloadBtn"
@@ -100,6 +100,7 @@
             </button>
           </div>
         </div>
+    </div>
 
         <!-- Submission Section -->
         <div class="flex flex-col justify-between items-center p-6 pt-0">
@@ -140,6 +141,25 @@
       </div>
     </main>
 
+    <!-- Background Music Player -->
+<div class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-300 shadow-md p-3 flex items-center justify-between px-4 z-50">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-music text-[#6984C9]"></i>
+      <span class="text-sm font-semibold text-gray-700">Background Music</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-28 accent-[#6984C9]" />
+      <button id="toggleMusicBtn" class="text-[#6984C9] hover:text-blue-700 font-medium">
+        ⏸ Pause
+      </button>
+    </div>
+  </div>
+  
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="https://earnnity.com/audio/music.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
     <!-- Firebase -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
@@ -169,114 +189,208 @@
       const quoteInput = document.getElementById("quoteinput");
       const textDisplay = document.getElementById("text");
       const shuffleBtn = document.getElementById("shuffleBtn");
-      const shareBtn = document.getElementById("shareBtn");
+    //   const shareBtn = document.getElementById("shareBtn");
       const downloadBtn = document.getElementById("downloadBtn");
       // แคปเฉพาะ quote card
       const target = document.getElementById("main");
       const shareIGBtn = document.getElementById("shareIGBtn");
 
+      async function analyzeQuoteWithGemini(quote) {
+  const API_KEY = 'AIzaSyAhn_j2j0fxnzxQhqnr1iYut013Qyu-3hs';
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+  const payload = {
+    contents: [
+      {
+        parts: [
+          {
+            text: `Please analyze the following quote:
+"${quote}"
+
+Respond in this JSON format:
+{
+  "inappropriate": true | false,           // Is the quote inappropriate or offensive?
+  "category": "motivation" | "humor" | "wisdom" | ...,  // Suggest a suitable category
+  "flagged_keywords": [ "ไอเหี้ย", "ไอสัด" ]       // List any inappropriate or sensitive keywords found
+}
+
+If there are no flagged keywords, return an empty array.`,
+          },
+        ],
+      },
+    ],
+  };
+
+  const res = await fetch(endpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const result = await res.json();
+  const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+  try {
+    // Clean markdown wrappers if any
+    const cleanedText = rawText.replace(/```json|```/g, "").trim();
+    return JSON.parse(cleanedText);
+  } catch (err) {
+    console.error("Failed to parse Gemini response", err, rawText);
+    return null;
+  }
+}
+
       // === FIREBASE SUBMIT ===
       sendBtn.addEventListener("click", async () => {
-        const quote = quoteInput.value.trim();
-        if (quote) {
-          await addDoc(collection(db, "quote"), { quote });
-          quoteInput.value = "";
-          Swal.fire("Added!", "Quote submitted successfully!", "success");
-        } else {
-          Swal.fire("Error!", "Please enter a quote.", "error");
-        }
-      });
+  const quote = quoteInput.value.trim();
+  if (!quote) {
+    Swal.fire("Error!", "Please enter a quote.", "error");
+    return;
+  }
 
-      // === SHUFFLE QUOTE ===
-      async function loadQuotes() {
-        const querySnapshot = await getDocs(collection(db, "quote"));
-        const quotes = [];
-        querySnapshot.forEach((docSnap) => {
-          const data = docSnap.data();
-          if (data.quote) quotes.push(data.quote);
-        });
+  const result = await analyzeQuoteWithGemini(quote);
+  if (!result) {
+    Swal.fire("Error!", "AI analysis failed. Try again.", "error");
+    return;
+  }
 
-        if (quotes.length > 0) {
-          const randomIndex = Math.floor(Math.random() * quotes.length);
-          textDisplay.textContent = quotes[randomIndex];
-        } else {
-          textDisplay.textContent = "No quotes found.";
-        }
-      }
+  if (result.inappropriate) {
+    Swal.fire("Blocked!", "Inappropriate content detected. Please revise.", "error");
+    return;
+  }
 
-      shuffleBtn.addEventListener("click", loadQuotes);
-
-      // === SHARE SCREEN ===
-shareBtn.addEventListener("click", async () => {
-  html2canvas(target).then(async (canvas) => {
-    canvas.toBlob(async (blob) => {
-      const file = new File([blob], "quote.png", { type: "image/png" });
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: "My Quote from ShuffleMe",
-            text: "Check out this awesome quote!",
-          });
-        } catch (err) {
-          Swal.fire("Error", "Sharing was canceled or failed.", "error");
-        }
-      } else {
-        Swal.fire(
-          "Unsupported",
-          "Sharing not supported on this device.",
-          "warning"
-        );
-      }
-    });
+  await addDoc(collection(db, "quote"), {
+    quote,
+    category: result.category || "uncategorized",
   });
+
+  quoteInput.value = "";
+  Swal.fire("Added!", "Quote submitted successfully!", "success");
 });
 
+      let allQuotes = [];
+let remainingQuotes = [];
+
+async function loadQuotes() {
+  if (allQuotes.length === 0) {
+    const querySnapshot = await getDocs(collection(db, "quote"));
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      if (data.quote) allQuotes.push(data.quote);
+    });
+    remainingQuotes = [...allQuotes];
+  }
+
+  // ถ้า remaining หมดแล้ว ให้เริ่มรอบใหม่
+  if (remainingQuotes.length === 0) {
+    remainingQuotes = [...allQuotes];
+  }
+
+  // เลือกแบบไม่ซ้ำ
+  const randomIndex = Math.floor(Math.random() * remainingQuotes.length);
+  const selectedQuote = remainingQuotes[randomIndex];
+  textDisplay.textContent = selectedQuote;
+
+  // ลบ quote ที่เลือกออกจาก remaining
+  remainingQuotes.splice(randomIndex, 1);
+}
+
+shuffleBtn.addEventListener("click", loadQuotes);
+
+      // === SHARE SCREEN ===
+// shareBtn.addEventListener("click", async () => {
+//   html2canvas(target).then(async (canvas) => {
+//     canvas.toBlob(async (blob) => {
+//       const file = new File([blob], "quote.png", { type: "image/png" });
+
+//       if (navigator.canShare && navigator.canShare({ files: [file] })) {
+//         try {
+//           await navigator.share({
+//             files: [file],
+//             title: "My Quote from ShuffleMe",
+//             text: "Check out this awesome quote!",
+//           });
+//         } catch (err) {
+//           Swal.fire("Error", "Sharing was canceled or failed.", "error");
+//         }
+//       } else {
+//         Swal.fire(
+//           "Unsupported",
+//           "Sharing not supported on this device.",
+//           "warning"
+//         );
+//       }
+//     });
+//   });
+// });
+
 // === DOWNLOAD SCREEN ===
-downloadBtn.addEventListener("click", () => {
-  html2canvas(target, {
-    useCORS: true,
-    allowTaint: true,
-    backgroundColor: "#F9F9F9", // หรือสีพื้นหลังของ card จริง
-    scale: 2, // ให้ match กับความละเอียดจอ
-  }).then((canvas) => {
-    const link = document.createElement("a");
-    link.download = "quote.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-  });
+downloadBtn.addEventListener("click", async () => {
+  await document.fonts.ready;
+  setTimeout(() => {
+    html2canvas(target, {
+      backgroundColor: "#F9F9F9",
+      scale: 2,
+      useCORS: true,
+    }).then((canvas) => {
+      const link = document.createElement("a");
+      link.download = "quote.png";
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    });
+  }, 500); // รอ DOM เสถียรก่อน
 });
 
 shareIGBtn.addEventListener("click", async () => {
-  html2canvas(target, {
-    useCORS: true,
-    backgroundColor: "#F9F9F9",
-    scale: window.devicePixelRatio,
-  }).then((canvas) => {
-    canvas.toBlob((blob) => {
-      const url = URL.createObjectURL(blob);
+    await document.fonts.ready; // รอให้โหลด font ก่อน
+  setTimeout(() => {
+    html2canvas(target, {
+      useCORS: true,
+      backgroundColor: "#F9F9F9",
+      scale: window.devicePixelRatio,
+    }).then((canvas) => {
+      canvas.toBlob((blob) => {
+        const url = URL.createObjectURL(blob);
 
-      // ดาวน์โหลดอัตโนมัติ
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "quote-for-ig.png";
-      link.click();
+        // ดาวน์โหลดอัตโนมัติ
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "quote-for-ig.png";
+        link.click();
 
-      // แจ้งผู้ใช้
-      Swal.fire({
-        title: "Ready to Post!",
-        text: "Image saved. Open Instagram and add it to your Story manually.",
-        icon: "info",
-        confirmButtonText: "Open Instagram",
-        showCancelButton: true,
-      }).then((result) => {
-        if (result.isConfirmed) {
-          window.open("instagram://story-camera", "_blank");
-        }
+        // แจ้งผู้ใช้
+        Swal.fire({
+          title: "Ready to Post!",
+          text: "Image saved. Open Instagram and add it to your Story manually.",
+          icon: "info",
+          confirmButtonText: "Open Instagram",
+          showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.open("instagram://story-camera", "_blank");
+          }
+        });
       });
     });
-  });
+  }, 300); // รอ 300ms
+});
+
+// === MUSIC CONTROL ===
+const music = document.getElementById("backgroundMusic");
+const toggleBtn = document.getElementById("toggleMusicBtn");
+let isPlaying = false;
+
+toggleBtn.addEventListener("click", () => {
+  if (!isPlaying) {
+    music.play();
+    toggleBtn.innerHTML = "⏸ Pause";
+  } else {
+    music.pause();
+    toggleBtn.innerHTML = "▶ Play";
+  }
+  isPlaying = !isPlaying;
 });
     </script>
   </body>
